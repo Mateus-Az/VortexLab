@@ -1,5 +1,8 @@
-package br.com.vortexlab.VortexLab.entity;
+package br.com.vortexlab.VortexLab.plan;
 
+import br.com.vortexlab.VortexLab.application.Application;
+import br.com.vortexlab.VortexLab.biling.Billing;
+import br.com.vortexlab.VortexLab.common.AbstractEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 

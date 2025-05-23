@@ -1,5 +1,7 @@
-package br.com.vortexlab.VortexLab.entity;
+package br.com.vortexlab.VortexLab.plan;
 
+import br.com.vortexlab.VortexLab.common.AbstractEntity;
+import br.com.vortexlab.VortexLab.application.Application;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

@@ -1,6 +1,8 @@
-package br.com.vortexlab.VortexLab.entity;
+package br.com.vortexlab.VortexLab.user;
 
-import br.com.vortexlab.VortexLab.enums.UserStatus;
+import br.com.vortexlab.VortexLab.common.AbstractEntity;
+import br.com.vortexlab.VortexLab.application.Application;
+import br.com.vortexlab.VortexLab.common.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 

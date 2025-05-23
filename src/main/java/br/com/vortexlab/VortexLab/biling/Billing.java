@@ -1,7 +1,10 @@
-package br.com.vortexlab.VortexLab.entity;
+package br.com.vortexlab.VortexLab.biling;
 
-import br.com.vortexlab.VortexLab.enums.PaymentMethod;
-import br.com.vortexlab.VortexLab.enums.PaymentStatus;
+import br.com.vortexlab.VortexLab.common.AbstractEntity;
+import br.com.vortexlab.VortexLab.plan.PlanHistory;
+import br.com.vortexlab.VortexLab.common.enums.PaymentMethod;
+import br.com.vortexlab.VortexLab.common.enums.PaymentStatus;
+import br.com.vortexlab.VortexLab.plan.Plan;
 import jakarta.persistence.*;
 import lombok.Data;
 

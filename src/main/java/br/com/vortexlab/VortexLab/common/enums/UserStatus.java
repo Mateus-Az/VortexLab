@@ -1,4 +1,4 @@
-package br.com.vortexlab.VortexLab.enums;
+package br.com.vortexlab.VortexLab.common.enums;
 
 public enum UserStatus {
     ACTIVE,

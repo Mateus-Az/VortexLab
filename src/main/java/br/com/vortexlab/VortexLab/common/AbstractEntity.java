@@ -1,4 +1,4 @@
-package br.com.vortexlab.VortexLab.entity;
+package br.com.vortexlab.VortexLab.common;
 
 import jakarta.persistence.*;
 import lombok.Data;

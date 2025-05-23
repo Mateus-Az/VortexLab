@@ -1,6 +1,11 @@
-package br.com.vortexlab.VortexLab.entity;
+package br.com.vortexlab.VortexLab.application;
 
-import br.com.vortexlab.VortexLab.enums.ApplicationStatus;
+import br.com.vortexlab.VortexLab.common.AbstractEntity;
+import br.com.vortexlab.VortexLab.plan.PlanHistory;
+import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
+import br.com.vortexlab.VortexLab.plan.Plan;
+import br.com.vortexlab.VortexLab.tenant.Tenant;
+import br.com.vortexlab.VortexLab.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
