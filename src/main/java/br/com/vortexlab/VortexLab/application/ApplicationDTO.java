@@ -1,22 +1,28 @@
 package br.com.vortexlab.VortexLab.application;
 
-import br.com.vortexlab.VortexLab.common.AbstractEntity;
-import br.com.vortexlab.VortexLab.plan.PlanHistory;
 import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
 import br.com.vortexlab.VortexLab.plan.Plan;
+import br.com.vortexlab.VortexLab.plan.PlanHistory;
 import br.com.vortexlab.VortexLab.tenant.Tenant;
+import br.com.vortexlab.VortexLab.tenant.TenantDTO;
 import br.com.vortexlab.VortexLab.user.User;
+import br.com.vortexlab.VortexLab.user.UserDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Entity
-@Data
-@Table(name = "applications")
-public class Application extends AbstractEntity {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApplicationDTO {
+
   private String name;
   private String url;
   private String description;
@@ -24,22 +30,12 @@ public class Application extends AbstractEntity {
   @Enumerated(EnumType.STRING)
   private ApplicationStatus status;
 
-  @OneToOne
-  @JoinColumn(name = "tenant_id")
-  @JsonManagedReference
-  private Tenant tenant;
+  private TenantDTO tenant;
 
-  @OneToMany(mappedBy = "application")
-  @JsonManagedReference
-  private List<Plan> plans;
+//  private List<PlanDTO> plans;
 
-  @OneToOne
-  @JoinColumn(name = "billing_history_id")
-  @JsonManagedReference
   private PlanHistory planHistory;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
   @JsonBackReference
-  private User user;
+  private UserDTO user;
 }

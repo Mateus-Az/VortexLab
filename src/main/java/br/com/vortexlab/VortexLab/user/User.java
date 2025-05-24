@@ -12,20 +12,35 @@ import java.util.List;
 @Data
 @Table(name = "users")
 public class User extends AbstractEntity {
+  @Column(nullable = false, length = 100)
   private String name;
+
+  @Column(nullable = false, length = 100, unique = true)
   private String email;
+
+  @Column(nullable = false)
   private String password;
+
+  @Column(nullable = false, length = 15, unique = true)
   private String username;
+
+  @Column(nullable = true, unique = true)
   private String razaoSocial;
+
   private String nomeFantasia;
+
+  @Column(nullable = true, unique = true)
   private String cnpj;
+
+  @Column(nullable = true, unique = true)
   private String cellPhone;
+
+  @Column(unique = true)
   private String cpf;
 
   @Enumerated(EnumType.STRING)
   private UserStatus status;
 
-  @OneToMany
-  @JoinColumn(name = "user_id")
+  @OneToMany(mappedBy = "user")
   private List<Application> applications;
 }
