@@ -1,4 +1,4 @@
-package br.com.vortexlab.VortexLab.common.enums;
+package br.com.vortexlab.VortexLab.plan;
 
 public enum PlanTypeRecorrence {
   LIFETIME,

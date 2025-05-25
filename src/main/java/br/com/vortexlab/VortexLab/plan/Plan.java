@@ -2,10 +2,7 @@ package br.com.vortexlab.VortexLab.plan;
 
 import br.com.vortexlab.VortexLab.common.AbstractEntity;
 import br.com.vortexlab.VortexLab.application.Application;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -17,7 +14,9 @@ public class Plan extends AbstractEntity {
 
   private String name;
   private String description;
-  private String type;
+
+  @Enumerated(EnumType.STRING)
+  private PlanTypeRecorrence type;
   private String resources;
   private BigDecimal price;
 

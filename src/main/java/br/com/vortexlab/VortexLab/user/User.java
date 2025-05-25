@@ -4,12 +4,15 @@ import br.com.vortexlab.VortexLab.common.AbstractEntity;
 import br.com.vortexlab.VortexLab.application.Application;
 import br.com.vortexlab.VortexLab.common.enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User extends AbstractEntity {
   @Column(nullable = false, length = 100)
