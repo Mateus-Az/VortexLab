@@ -12,27 +12,27 @@ public class UserService {
   private final UserRepository userRepository;
   private final UserMapper userMapper;
 
-  public UserDTO registerUser(UserDTO userDTO) {
+  public UserResponse registerUser(UserRequest userDTO) {
     var user = this.userMapper.toEntity(userDTO);
     user.setStatus(UserStatus.REGISTERED);
     var savedUser = this.userRepository.save(user);
-    return this.userMapper.toDTO(savedUser);
+    return this.userMapper.toResponse(savedUser);
   }
 
-  public UserDTO updateUser(Long id, UserDTO userDTO) {
+  public UserResponse updateUser(Long id, UserRequest userDTO) {
     var user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
     this.userMapper.update(userDTO, user);
-    return this.userMapper.toDTO(this.userRepository.save(user));
+    return this.userMapper.toResponse(this.userRepository.save(user));
   }
 
-  public UserDTO getUser(Long id) {
+  public UserResponse getUser(Long id) {
     var user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
-    return this.userMapper.toDTO(user);
+    return this.userMapper.toResponse(user);
   }
 
-  public Page<UserDTO> getAllUsers(Pageable pageable) {
+  public Page<UserResponse> getAllUsers(Pageable pageable) {
     var users = this.userRepository.findAll(pageable);
-    return users.map(this.userMapper::toDTO);
+    return users.map(this.userMapper::toResponse);
   }
 
   public void delete(Long id) {

@@ -16,23 +16,23 @@ public class UserController {
   private final UserService userService;
 
   @PostMapping
-  public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO) {
+  public ResponseEntity<UserResponse> registerUser(@RequestBody UserRequest userDTO) {
     return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.registerUser(userDTO));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<UserDTO> updateUser(
-      @PathVariable("id") Long id, @RequestBody UserDTO userDTO) {
+  public ResponseEntity<UserResponse> updateUser(
+      @PathVariable("id") Long id, @RequestBody UserRequest userDTO) {
     return ResponseEntity.status(HttpStatus.OK).body(this.userService.updateUser(id, userDTO));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id) {
+  public ResponseEntity<UserResponse> getUser(@PathVariable("id") Long id) {
     return ResponseEntity.status(HttpStatus.OK).body(this.userService.getUser(id));
   }
 
   @GetMapping
-  public Page<UserDTO> getAllUsers(@PageableDefault(size = 10, sort = "name") Pageable pageable) {
+  public Page<UserResponse> getAllUsers(@PageableDefault(size = 10, sort = "name") Pageable pageable) {
     return this.userService.getAllUsers(pageable);
   }
 
