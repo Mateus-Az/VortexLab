@@ -42,4 +42,12 @@ public class Application extends AbstractEntity {
   @JoinColumn(name = "user_id")
   @JsonBackReference
   private User user;
+
+  @ManyToMany
+  @JoinTable(
+      name = "users_applications",
+      joinColumns = @JoinColumn(name = "application_id"),
+      inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @JsonManagedReference
+  private List<User> users;
 }

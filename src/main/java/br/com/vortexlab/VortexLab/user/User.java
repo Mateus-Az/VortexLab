@@ -44,6 +44,6 @@ public class User extends AbstractEntity {
   @Enumerated(EnumType.STRING)
   private UserStatus status;
 
-  @OneToMany(mappedBy = "user")
+  @ManyToMany(mappedBy = "users")
   private List<Application> applications;
 }
