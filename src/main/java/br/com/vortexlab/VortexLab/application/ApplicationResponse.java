@@ -1,9 +1,11 @@
 package br.com.vortexlab.VortexLab.application;
 
+import java.time.LocalDateTime;
+
 public record ApplicationResponse(
     ApplicationBase application,
-    String id,
-    String createdAt,
-    String updatedAt,
-    String deletedAt,
+    Long id,
+    LocalDateTime createdAt,
+    LocalDateTime updatedAt,
+    LocalDateTime deletedAt,
     Boolean deleted) {}
