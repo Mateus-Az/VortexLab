@@ -1,5 +1,8 @@
 package br.com.vortexlab.VortexLab.plan;
 
+import br.com.vortexlab.VortexLab.application.Application;
+import br.com.vortexlab.VortexLab.application.ApplicationRepository;
+import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,8 +33,9 @@ import org.springframework.data.domain.PageRequest;
 @ExtendWith(MockitoExtension.class)
 public class PlanServiceTest {
 
-  @Mock private PlanRepository planRepository;
   @Mock private PlanMapper planMapper;
+  @Mock private PlanRepository planRepository;
+  @Mock private ApplicationRepository applicationRepository;
   @InjectMocks private PlanService planService;
 
   private Plan plan;
@@ -57,7 +61,8 @@ public class PlanServiceTest {
                 "something...",
                 PlanTypeRecorrence.MONTHLY,
                 new BigDecimal("10.00"),
-                "support 24h, 7 days on week; backup; 1000 emails"));
+                "support 24h, 7 days on week; backup; 1000 emails"),
+            1L);
 
     this.planResponse =
         new PlanResponse(
@@ -89,9 +94,22 @@ public class PlanServiceTest {
 
     planSaved.setId(1L);
 
+    Application application =
+        Application.builder()
+            .name("VortexLab")
+            .description("something...")
+            .url("https://vortexlab.com.br")
+            .description("vortexLab is a software for developers...")
+            .status(ApplicationStatus.ACTIVE)
+            .build();
+
+    application.setId(1L);
+
     // When / Act: call the method under test
     when(planMapper.toEntity(planRequest)).thenReturn(plan);
     when(planRepository.save(plan)).thenReturn(planSaved);
+    when(applicationRepository.findById(planRequest.applicationId()))
+        .thenReturn(Optional.of(application));
     when(planMapper.toResponse(planSaved)).thenReturn(planResponse);
 
     PlanResponse actualResponse = planService.registerPlan(planRequest);
@@ -105,6 +123,7 @@ public class PlanServiceTest {
     verify(planMapper, times(1)).toEntity(planRequest);
     verify(planRepository, times(1)).save(plan);
     verify(planMapper, times(1)).toResponse(planSaved);
+    verify(applicationRepository, times(1)).findById(planRequest.applicationId());
   }
 
   @Test
@@ -221,7 +240,7 @@ public class PlanServiceTest {
     given(planMapper.toResponse(plan1)).willReturn(planResponse1);
     // When / Act: call the method under test
 
-    Page<PlanResponse> allPlans = planService.getAllPlans(PageRequest.of(0, 10));
+    Page<PlanResponse> allPlans = planService.getAllPlans(PageRequest.of(0, 10), null, null, null);
 
     // Then / Assert: verify results or exceptions
 

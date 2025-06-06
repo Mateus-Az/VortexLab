@@ -77,6 +77,7 @@ public class ApplicationServiceTest {
             fixedTime,
             fixedTime,
             null,
+            null,
             false);
 
     // When / Act: call the method under test
@@ -111,6 +112,7 @@ public class ApplicationServiceTest {
             fixedTime,
             fixedTime,
             null,
+            null,
             false);
 
     given(applicationRepository.findById(1L)).willReturn(Optional.of(application));
@@ -143,6 +145,7 @@ public class ApplicationServiceTest {
             1L,
             fixedTime,
             fixedTime,
+            null,
             null,
             false);
 
@@ -185,12 +188,14 @@ public class ApplicationServiceTest {
   }
 
   @Test
-  @DisplayName("Given application list, when findAll applications is called, then returns list of aplications ")
+  @DisplayName(
+      "Given application list, when findAll applications is called, then returns list of aplications ")
   void givenApplicationList_whenFindAll_thenReturnListOfAplications() {
     // Given / Arrange: prepare initial data and mocks
     LocalDateTime fixedTime = LocalDateTime.of(2025, 1, 1, 10, 0);
 
-    Application app1 = Application.builder()
+    Application app1 =
+        Application.builder()
             .name("VortexLab")
             .url("https://vortexlab.com.br")
             .description("vortexLab is a software for developers...")
@@ -198,7 +203,8 @@ public class ApplicationServiceTest {
             .build();
     app1.setId(1L);
 
-    Application app2 = Application.builder()
+    Application app2 =
+        Application.builder()
             .name("VortexLab2")
             .url("https://vortexlab2.com.br")
             .description("vortexLab is a software for developers...")
@@ -206,30 +212,34 @@ public class ApplicationServiceTest {
             .build();
     app2.setId(2L);
 
-    ApplicationResponse response1 = new ApplicationResponse(
+    ApplicationResponse response1 =
+        new ApplicationResponse(
             new ApplicationBase(
-                    "VortexLab",
-                    "https://vortexlab.com.br",
-                    "vortexLab is a software for developers..."),
+                "VortexLab",
+                "https://vortexlab.com.br",
+                "vortexLab is a software for developers..."),
             1L,
             fixedTime,
             fixedTime,
             null,
+            null,
             false);
 
-    ApplicationResponse response2 = new ApplicationResponse(
+    ApplicationResponse response2 =
+        new ApplicationResponse(
             new ApplicationBase(
-                    "VortexLab2",
-                    "https://vortexlab2.com.br",
-                    "vortexLab is a software for developers..."),
+                "VortexLab2",
+                "https://vortexlab2.com.br",
+                "vortexLab is a software for developers..."),
             2L, // ID deve corresponder ao app2
             fixedTime,
             fixedTime,
             null,
+            null,
             false);
 
     given(applicationRepository.findAll(ArgumentMatchers.any(Pageable.class)))
-            .willReturn(new PageImpl<>(List.of(app1, app2)));
+        .willReturn(new PageImpl<>(List.of(app1, app2)));
     given(applicationMapper.toResponse(app1)).willReturn(response1);
     given(applicationMapper.toResponse(app2)).willReturn(response2);
 

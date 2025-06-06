@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -44,16 +45,11 @@ public class Application extends AbstractEntity {
   @JsonManagedReference
   private PlanHistory planHistory;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  @JsonBackReference
-  private User user;
-
   @ManyToMany
   @JoinTable(
       name = "users_applications",
       joinColumns = @JoinColumn(name = "application_id"),
       inverseJoinColumns = @JoinColumn(name = "user_id"))
   @JsonManagedReference
-  private List<User> users;
+  private Set<User> users;
 }

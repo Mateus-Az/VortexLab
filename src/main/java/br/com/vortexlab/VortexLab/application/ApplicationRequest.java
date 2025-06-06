@@ -1,3 +1,12 @@
 package br.com.vortexlab.VortexLab.application;
 
-public record ApplicationRequest(ApplicationBase application) {}
+import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApplicationRequest extends ApplicationBase {
+  ApplicationStatus status;
+}

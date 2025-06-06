@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/plan")
+@RequestMapping("api/plan")
 @RequiredArgsConstructor
 public class PlanController {
 
@@ -22,8 +22,11 @@ public class PlanController {
 
   @GetMapping
   public Page<PlanResponse> getAllPlans(
+      @RequestParam(value = "applicationId", required = false) Long applicationId,
+      @RequestParam(value = "name", required = false, defaultValue = "") String name,
+      @RequestParam(value = "description", required = false, defaultValue = "") String description,
       @PageableDefault(size = 10, sort = "name") Pageable pageable) {
-    return this.planService.getAllPlans(pageable);
+    return this.planService.getAllPlans(pageable, applicationId, name, description);
   }
 
   @GetMapping("/{id}")

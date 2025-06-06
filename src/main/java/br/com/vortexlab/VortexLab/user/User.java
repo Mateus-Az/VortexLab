@@ -6,7 +6,8 @@ import br.com.vortexlab.VortexLab.common.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -46,5 +47,6 @@ public class User extends AbstractEntity {
   private UserStatus status;
 
   @ManyToMany(mappedBy = "users")
-  private List<Application> applications;
+  @Builder.Default
+  private Set<Application> applications = new HashSet<>();
 }

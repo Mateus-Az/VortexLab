@@ -1,5 +1,6 @@
 package br.com.vortexlab.VortexLab.plan;
 
+import br.com.vortexlab.VortexLab.application.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,15 +13,22 @@ import java.time.LocalDateTime;
 public class PlanService {
   private final PlanRepository planRepository;
   private final PlanMapper planMapper;
+  private final ApplicationRepository applicationRepository;
 
   public PlanResponse registerPlan(PlanRequest planDTO) {
+    var application =
+        this.applicationRepository
+            .findById(planDTO.getApplicationId())
+            .orElseThrow(() -> new RuntimeException("Application not found"));
     Plan plan = planMapper.toEntity(planDTO);
+    plan.setApplication(application);
     var planSaved = this.planRepository.save(plan);
     return planMapper.toResponse(planSaved);
   }
 
-  public Page<PlanResponse> getAllPlans(Pageable pageable) {
-    var plans = this.planRepository.findAll(pageable);
+  public Page<PlanResponse> getAllPlans(
+      Pageable pageable, Long applicationId, String name, String description) {
+    var plans = this.planRepository.findAll(pageable, applicationId, name, description);
     return plans.map(this.planMapper::toResponse);
   }
 

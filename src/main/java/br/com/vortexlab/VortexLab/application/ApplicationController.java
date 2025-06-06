@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/application")
+@RequestMapping("/api/application")
 @RequiredArgsConstructor
 public class ApplicationController {
   private final ApplicationService applicationService;
@@ -33,7 +33,7 @@ public class ApplicationController {
     return ResponseEntity.status(HttpStatus.OK).body(this.applicationService.findById(id));
   }
 
-  @PatchMapping("/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<ApplicationResponse> updateApplication(
       @PathVariable("id") Long id, @RequestBody ApplicationRequest applicationDTO) {
     return ResponseEntity.status(HttpStatus.OK)

@@ -1,11 +1,23 @@
 package br.com.vortexlab.VortexLab.application;
 
-import java.time.LocalDateTime;
+import br.com.vortexlab.VortexLab.plan.PlanResponse;
+import br.com.vortexlab.VortexLab.user.UserResponse;
+import lombok.*;
 
-public record ApplicationResponse(
-    ApplicationBase application,
-    Long id,
-    LocalDateTime createdAt,
-    LocalDateTime updatedAt,
-    LocalDateTime deletedAt,
-    Boolean deleted) {}
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApplicationResponse extends ApplicationBase {
+  Long id;
+  LocalDateTime createdAt;
+  LocalDateTime updatedAt;
+  LocalDateTime deletedAt;
+  List<PlanResponse> plans;
+  Set<UserResponse> users;
+  Boolean deleted;
+}
