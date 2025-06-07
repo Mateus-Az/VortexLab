@@ -1,7 +1,8 @@
 package br.com.vortexlab.VortexLab.plan;
 
+import br.com.vortexlab.VortexLab.plan.dto.PlanRequest;
+import br.com.vortexlab.VortexLab.plan.dto.PlanResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 

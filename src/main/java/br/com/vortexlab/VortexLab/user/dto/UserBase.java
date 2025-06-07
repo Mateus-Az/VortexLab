@@ -1,4 +1,4 @@
-package br.com.vortexlab.VortexLab.user;
+package br.com.vortexlab.VortexLab.user.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;

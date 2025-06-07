@@ -1,6 +1,5 @@
-package br.com.vortexlab.VortexLab.user;
+package br.com.vortexlab.VortexLab.user.dto;
 
-import br.com.vortexlab.VortexLab.application.ApplicationResponse;
 import br.com.vortexlab.VortexLab.common.enums.UserStatus;
 import lombok.*;
 
@@ -14,7 +13,7 @@ import java.util.Set;
 public class UserResponse extends UserBase {
   Long id;
   UserStatus status;
-  Set<ApplicationResponse> applications;
+  Set<Long> applicationIds;
   LocalDateTime createdAt;
   LocalDateTime updatedAt;
   LocalDateTime deletedAt;

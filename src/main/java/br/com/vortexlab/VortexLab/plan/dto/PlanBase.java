@@ -1,5 +1,6 @@
-package br.com.vortexlab.VortexLab.plan;
+package br.com.vortexlab.VortexLab.plan.dto;
 
+import br.com.vortexlab.VortexLab.plan.PlanTypeRecorrence;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;

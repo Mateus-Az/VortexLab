@@ -1,7 +1,5 @@
-package br.com.vortexlab.VortexLab.application;
+package br.com.vortexlab.VortexLab.application.dto;
 
-import br.com.vortexlab.VortexLab.plan.PlanResponse;
-import br.com.vortexlab.VortexLab.user.UserResponse;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,7 +15,7 @@ public class ApplicationResponse extends ApplicationBase {
   LocalDateTime createdAt;
   LocalDateTime updatedAt;
   LocalDateTime deletedAt;
-  List<PlanResponse> plans;
-  Set<UserResponse> users;
+  Set<Long> planIds;
+  Set<Long> userIds;
   Boolean deleted;
 }

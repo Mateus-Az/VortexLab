@@ -1,10 +1,11 @@
 package br.com.vortexlab.VortexLab.common.enums;
 
 public enum UserStatus {
-    ACTIVE,
-    INACTIVE,
-    BLOCKED,
-    ARCHIVED,
     REGISTERED,
-    PENDING_ACTIVATION
+    PENDING_VERIFICATION,
+    PENDING_PAYMENT,
+    ACTIVE,
+    SUSPENDED,
+    DELETED,
+    EXPIRED
 }

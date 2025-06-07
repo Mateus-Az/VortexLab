@@ -1,5 +1,7 @@
 package br.com.vortexlab.VortexLab.user;
 
+import br.com.vortexlab.VortexLab.user.dto.UserRequest;
+import br.com.vortexlab.VortexLab.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -20,6 +22,18 @@ public class UserController {
     return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.registerUser(userDTO));
   }
 
+  @GetMapping("/verify-email")
+  public ResponseEntity ve(@RequestParam(name = "emailToken", required = true) String emailToken) {
+    this.userService.verifyUserEmail(emailToken);
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  @PostMapping("/request-email-verification/{id}")
+  public ResponseEntity<Void> requestEmailVerification(@PathVariable("id") Long userId) {
+    this.userService.requestEmailVerification(userId);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
+
   @PutMapping("/{id}")
   public ResponseEntity<UserResponse> updateUser(
       @PathVariable("id") Long id, @RequestBody UserRequest userDTO) {
@@ -32,7 +46,8 @@ public class UserController {
   }
 
   @GetMapping
-  public Page<UserResponse> getAllUsers(@PageableDefault(size = 10, sort = "name") Pageable pageable) {
+  public Page<UserResponse> getAllUsers(
+      @PageableDefault(size = 10, sort = "name") Pageable pageable) {
     return this.userService.getAllUsers(pageable);
   }
 

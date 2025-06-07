@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,18 +39,20 @@ public class Application extends AbstractEntity {
 
   @OneToMany(mappedBy = "application")
   @JsonManagedReference
-  private List<Plan> plans;
+  private Set<Plan> plans;
 
   @OneToOne
   @JoinColumn(name = "billing_history_id")
   @JsonManagedReference
   private PlanHistory planHistory;
 
-  @ManyToMany
+  @ManyToMany(
+      cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+      fetch = FetchType.LAZY)
   @JoinTable(
       name = "users_applications",
       joinColumns = @JoinColumn(name = "application_id"),
       inverseJoinColumns = @JoinColumn(name = "user_id"))
   @JsonManagedReference
-  private Set<User> users;
+  private Set<User> users = new HashSet<>();
 }

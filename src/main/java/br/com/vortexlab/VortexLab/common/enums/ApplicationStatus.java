@@ -4,6 +4,6 @@ public enum ApplicationStatus {
     ACTIVE,
     INACTIVE,
     MAINTENANCE,
-    ARCHIVED,
+    DELETED,
     FAILED
 }

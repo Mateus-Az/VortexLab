@@ -1,9 +1,8 @@
-package br.com.vortexlab.VortexLab.plan;
+package br.com.vortexlab.VortexLab.plan.dto;
 
 import java.time.LocalDateTime;
 
 public class PlanResponse extends PlanBase {
-  PlanBase plan;
   Long id;
   LocalDateTime createdAt;
   LocalDateTime updatedAt;

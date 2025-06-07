@@ -1,6 +1,8 @@
 package br.com.vortexlab.VortexLab.plan;
 
 import br.com.vortexlab.VortexLab.application.ApplicationRepository;
+import br.com.vortexlab.VortexLab.plan.dto.PlanRequest;
+import br.com.vortexlab.VortexLab.plan.dto.PlanResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

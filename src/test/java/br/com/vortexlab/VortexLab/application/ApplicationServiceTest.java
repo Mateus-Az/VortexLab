@@ -1,13 +1,9 @@
 package br.com.vortexlab.VortexLab.application;
 
+import br.com.vortexlab.VortexLab.application.dto.ApplicationBase;
+import br.com.vortexlab.VortexLab.application.dto.ApplicationRequest;
+import br.com.vortexlab.VortexLab.application.dto.ApplicationResponse;
 import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
-import br.com.vortexlab.VortexLab.common.enums.UserStatus;
-import br.com.vortexlab.VortexLab.plan.Plan;
-import br.com.vortexlab.VortexLab.plan.PlanResponse;
-import br.com.vortexlab.VortexLab.plan.PlanTypeRecorrence;
-import br.com.vortexlab.VortexLab.user.User;
-import br.com.vortexlab.VortexLab.user.UserBase;
-import br.com.vortexlab.VortexLab.user.UserResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +17,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

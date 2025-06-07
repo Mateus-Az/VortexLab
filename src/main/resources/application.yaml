@@ -1,16 +1,39 @@
 server:
   port: 8080
+
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:postgresql://localhost:5432/vortexlab
+    driverClassName: org.postgresql.Driver
+    username: root
+    password: OligarcaZ
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  secret: ${JWT_SECRET:h2CSC6GwZNh5H9Qz4ynlFOjuzE8Tvhaud}
+  email-verification:
+    expiration-hours: 24
+# Configuração H2 comentada (backup)
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: ''
+#  h2:
+#    console:
+#      enabled: true
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect

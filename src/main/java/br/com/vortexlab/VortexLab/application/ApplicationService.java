@@ -1,5 +1,7 @@
 package br.com.vortexlab.VortexLab.application;
 
+import br.com.vortexlab.VortexLab.application.dto.ApplicationRequest;
+import br.com.vortexlab.VortexLab.application.dto.ApplicationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

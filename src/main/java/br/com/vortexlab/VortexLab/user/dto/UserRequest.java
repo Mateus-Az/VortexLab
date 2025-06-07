@@ -1,15 +1,22 @@
-package br.com.vortexlab.VortexLab.plan;
+package br.com.vortexlab.VortexLab.user.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlanRequest extends PlanBase {
+public class UserRequest extends UserBase {
+
+  @NotBlank
+  @Length(max = 50)
+  @Schema(description = "Password of the customer", example = "password")
+  String password;
+
   @NotBlank
   @Schema(description = "Id of the application", example = "1")
   Long applicationId;

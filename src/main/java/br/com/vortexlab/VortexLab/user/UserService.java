@@ -2,8 +2,15 @@ package br.com.vortexlab.VortexLab.user;
 
 import br.com.vortexlab.VortexLab.application.Application;
 import br.com.vortexlab.VortexLab.application.ApplicationRepository;
+import br.com.vortexlab.VortexLab.common.EmailVerificationData;
 import br.com.vortexlab.VortexLab.common.enums.UserStatus;
+import br.com.vortexlab.VortexLab.common.services.EmailService;
+import br.com.vortexlab.VortexLab.common.services.TokenService;
+import br.com.vortexlab.VortexLab.user.dto.UserBase;
+import br.com.vortexlab.VortexLab.user.dto.UserRequest;
+import br.com.vortexlab.VortexLab.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,10 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
   private final UserRepository userRepository;
   private final UserMapper userMapper;
   private final ApplicationRepository applicationRepository;
+  private final EmailService emailService;
+  private final TokenService tokenService;
 
   @Transactional
   public UserResponse registerUser(UserRequest userDTO) {
@@ -44,9 +54,9 @@ public class UserService {
               }
             });
 
-    var user = this.userMapper.toEntity(userDTO);
+    User user = this.userMapper.toEntity(userDTO);
     user.setStatus(UserStatus.REGISTERED);
-    user.getApplications().add(application);
+    user.addApplication(application);
     var savedUser = this.userRepository.save(user);
     return this.userMapper.toResponse(savedUser);
   }
@@ -92,5 +102,37 @@ public class UserService {
   private boolean equalsIgnoreCase(String str1, String str2) {
     if (str1 == null || str2 == null) return false;
     return str1.equalsIgnoreCase(str2);
+  }
+
+  void requestEmailVerification(Long id) {
+    User user =
+        this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+
+    String emailToken = this.tokenService.generateEmailVerificationToken(user);
+    String verificationLink =
+        "http://localhost:8080/api/user/verify-email?emailToken=" + emailToken;
+    this.emailService.sendEmail(user, verificationLink);
+    user.setStatus(UserStatus.PENDING_VERIFICATION);
+    this.userRepository.save(user);
+  }
+
+  /**
+   * Verifies a user's email address using the provided verification token.
+   *
+   * <p>This method decrypts the email verification token, retrieves the associated user, updates
+   * their status to VERIFIED, and persists the changes to the database.
+   *
+   * @param emailToken the encrypted verification token sent to the user's email
+   */
+  public void verifyUserEmail(String emailToken) {
+    EmailVerificationData data = this.tokenService.verifyEmailVerificationToken(emailToken);
+    log.info("User with ID {} has been verified", data.getUserId());
+    User user =
+        this.userRepository
+            .findById(data.getUserId())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    user.setStatus(UserStatus.PENDING_PAYMENT);
+    this.userRepository.save(user);
   }
 }

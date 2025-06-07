@@ -3,6 +3,9 @@ package br.com.vortexlab.VortexLab.plan;
 import br.com.vortexlab.VortexLab.application.Application;
 import br.com.vortexlab.VortexLab.application.ApplicationRepository;
 import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
+import br.com.vortexlab.VortexLab.plan.dto.PlanBase;
+import br.com.vortexlab.VortexLab.plan.dto.PlanRequest;
+import br.com.vortexlab.VortexLab.plan.dto.PlanResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.*;
 
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package br.com.vortexlab.VortexLab.application;
+package br.com.vortexlab.VortexLab.application.dto;
 
 import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
 import lombok.*;

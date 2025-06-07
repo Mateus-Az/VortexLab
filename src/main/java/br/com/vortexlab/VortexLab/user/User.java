@@ -46,7 +46,12 @@ public class User extends AbstractEntity {
   @Enumerated(EnumType.STRING)
   private UserStatus status;
 
-  @ManyToMany(mappedBy = "users")
+  @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
   @Builder.Default
   private Set<Application> applications = new HashSet<>();
+
+  public void addApplication(Application application) {
+    this.applications.add(application);
+    application.getUsers().add(this);
+  }
 }
