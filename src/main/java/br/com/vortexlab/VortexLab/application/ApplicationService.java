@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -21,11 +22,13 @@ public class ApplicationService {
     return applicationMapper.toResponse(applicationSaved);
   }
 
+  @Transactional
   public Page<ApplicationResponse> getAll(Pageable pageable) {
     var applications = this.applicationRepository.findAll(pageable);
     return applications.map(this.applicationMapper::toResponse);
   }
 
+  @Transactional
   public ApplicationResponse findById(Long id) {
     var application =
         this.applicationRepository

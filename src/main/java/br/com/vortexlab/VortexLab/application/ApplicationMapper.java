@@ -2,6 +2,7 @@ package br.com.vortexlab.VortexLab.application;
 
 import br.com.vortexlab.VortexLab.application.dto.ApplicationRequest;
 import br.com.vortexlab.VortexLab.application.dto.ApplicationResponse;
+import br.com.vortexlab.VortexLab.applicationSchema.ApplicationSchemaVersion;
 import br.com.vortexlab.VortexLab.plan.Plan;
 import br.com.vortexlab.VortexLab.plan.PlanMapper;
 import br.com.vortexlab.VortexLab.user.User;
@@ -21,11 +22,11 @@ import java.util.stream.Collectors;
     uses = {PlanMapper.class, UserMapper.class})
 public interface ApplicationMapper {
 
-
   Application toEntity(ApplicationRequest applicationDTO);
 
   @Mapping(target = "planIds", source = "plans")
   @Mapping(target = "userIds", source = "users")
+  @Mapping(target = "applicationSchemaVersionIds", source = "applicationSchemaVersions")
   ApplicationResponse toResponse(Application application);
 
   default Set<Long> extractIdsPlan(Set<Plan> plans) {
@@ -33,6 +34,16 @@ public interface ApplicationMapper {
         ? Collections.emptySet()
         : plans.stream()
             .map(Plan::getId)
+            .sorted()
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+  }
+
+  default Set<Long> extractIdsApplicationSchemaVersion(
+      Set<ApplicationSchemaVersion> applicationSchemaVersions) {
+    return applicationSchemaVersions == null
+        ? Collections.emptySet()
+        : applicationSchemaVersions.stream()
+            .map(ApplicationSchemaVersion::getId)
             .sorted()
             .collect(Collectors.toCollection(LinkedHashSet::new));
   }

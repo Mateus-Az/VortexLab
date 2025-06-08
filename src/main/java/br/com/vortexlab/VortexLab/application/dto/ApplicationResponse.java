@@ -17,5 +17,7 @@ public class ApplicationResponse extends ApplicationBase {
   LocalDateTime deletedAt;
   Set<Long> planIds;
   Set<Long> userIds;
+  Long currentSchemaVersionId;
+  Set<Long> applicationSchemaVersionIds;
   Boolean deleted;
 }

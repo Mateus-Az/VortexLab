@@ -1,5 +1,6 @@
 package br.com.vortexlab.VortexLab.application;
 
+import br.com.vortexlab.VortexLab.applicationSchema.ApplicationSchemaVersion;
 import br.com.vortexlab.VortexLab.common.AbstractEntity;
 import br.com.vortexlab.VortexLab.plan.PlanHistory;
 import br.com.vortexlab.VortexLab.common.enums.ApplicationStatus;
@@ -55,4 +56,14 @@ public class Application extends AbstractEntity {
       inverseJoinColumns = @JoinColumn(name = "user_id"))
   @JsonManagedReference
   private Set<User> users = new HashSet<>();
+
+  @OneToMany(mappedBy = "application")
+  @JsonBackReference
+  private Set<ApplicationSchemaVersion> applicationSchemaVersions = new HashSet<>();
+
+  private Long currentSchemaVersionId;
+
+  public void addApplicationSchemaVersion(ApplicationSchemaVersion applicationSchemaVersion) {
+    this.applicationSchemaVersions.add(applicationSchemaVersion);
+  }
 }
