@@ -20,6 +20,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:7080/realms/vortexlab/protocol/openid-connect/certs"
 
 jwt:
   secret: ${JWT_SECRET:h2CSC6GwZNh5H9Qz4ynlFOjuzE8Tvhaud}
